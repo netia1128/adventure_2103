@@ -13,6 +13,10 @@ RSpec.describe Park do
     @trail6 = Trail.new({name: 'Tower Bridge', length: '3 miles', level: :moderate})
     @park1 = Park.new('Capitol Reef')
     @park2 = Park.new('Bryce Canyon')
+    @hiker1 = Hiker.new('Dora', :moderate)
+    @hiker2 = Hiker.new('Frank', :easy)
+    @hiker3 = Hiker.new('Jack', :strenuous)
+    @hiker4 = Hiker.new('Sally', :strenuous)
   end
 
   describe '#initialize' do
@@ -75,6 +79,30 @@ RSpec.describe Park do
 
       expect(@park1.trails_by_level).to eq(park1_trails_by_level)
       expect(@park2.trails_by_level).to eq(park2_trails_by_level)
+    end
+  end
+  describe '#visitors_log' do
+    it 'returns a hash detailing the visitor logs' do
+      #will clean up hooking later, time allowing
+      trail1 = Trail.new({name: 'Rim Trail', length: '11 miles', level: :easy})
+      trail2 = Trail.new({name: "Queen's/Navajo Loop", length: '2.9 miles', level: :moderate})
+      trail3 = Trail.new({name: 'Tower Bridge', length: '3 miles', level: :moderate})
+      trail4 = Trail.new({name: 'Peekaboo Loop', length: '5.5 miles', level: :strenuous})
+      @park2.add_trail(trail1)
+      @park2.add_trail(trail2)
+      @park2.add_trail(trail3)
+      @park2.add_trail(trail4)
+      #STUBS ARE THE BANE OF MY EXISTENCE!!!!!!!
+      # allow(@hiker1).to receive(:visit).with(@park2, 'dogs')
+      @hiker1.visit(@park2, '19800623')
+      @hiker2.visit(@park2, '19800624')
+      @hiker3.visit(@park2, '19800624')
+      @hiker4.visit(@park2, '19800625')
+      @hiker1.visit(@park2, '20200623')
+      @hiker2.visit(@park2, '20200624')
+      @hiker3.visit(@park2, '20200624')
+      @hiker4.visit(@park2, '20200625')
+      expect(@park2.visitors_log).to be_a(Hash)
     end
   end
 end

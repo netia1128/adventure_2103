@@ -37,10 +37,12 @@ RSpec.describe Hiker do
       expect(@hiker.snacks).to eq({"water"=>2, "trail mix"=>3})
     end
   end
-  describe '#parks_visited' do
+  describe '#visit' do
     it 'lets the hiker visit parks' do
       @hiker.visit(@park1)
       @hiker.visit(@park2)
+      # allow(@park1).to receive(:mark_vistor_log) #{visitors_log[@hiker] => '19800623'}
+      # allow(@park2).to receive(:mark_vistor_log)# {visitors_log[@hiker] => '19800623'}
       expect(@hiker.parks_visited).to eq([@park1, @park2])
     end
   end

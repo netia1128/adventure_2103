@@ -1,10 +1,12 @@
 class Park
   attr_reader :name,
-              :trails
+              :trails,
+              :log
 
   def initialize(name)
     @name = name
     @trails = []
+    @log = {}
   end
 
   def add_trail(trail)
@@ -29,6 +31,17 @@ class Park
     end
   end
 
+  def mark_vistor_log(hiker, date)
+    @log[hiker] = date
+  end
+
+  def visitors_log
+    #wasted too much time trying to get the stub to actually do this :'(
+    visitors_log = {}
+    @log.each do |hiker, date|
+      visitors_log[date] = hiker
+    end
+  end
   private
 
   def trails_at_level(experience_level)

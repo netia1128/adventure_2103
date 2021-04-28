@@ -1,3 +1,5 @@
+require 'time'
+
 class Hiker
   attr_reader :name,
               :experience_level,
@@ -15,8 +17,9 @@ class Hiker
     @snacks[snack] += quantity
   end
 
-  def visit(park)
+  def visit(park, date = Date.today.strftime('%d%m%y'))
     @parks_visited << park
+    park.mark_vistor_log(self, date)
   end
 
   def possible_trails
