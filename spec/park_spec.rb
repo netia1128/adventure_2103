@@ -55,4 +55,26 @@ RSpec.describe Park do
       expect(@park2.hikeable_miles).to eq(16.9)
     end
   end
+  describe '#trails_by_level' do
+    it 'returns a hash of trails by level' do
+      @park1.add_trail(@trail1)
+      @park1.add_trail(@trail2)
+      @park1.add_trail(@trail3)
+      @park2.add_trail(@trail4)
+      @park2.add_trail(@trail5)
+      @park2.add_trail(@trail6)
+      park1_trails_by_level = {
+                                :easy => ['Grand Wash'],
+                                :moderate => ['Cohab Canyon'],
+                                :strenuous => ["Chimney Rock Loop"]
+                              }
+      park2_trails_by_level = {
+                                :easy => ["Rim Trail"],
+                                :moderate => ["Queen's/Navajo Loop", "Tower Bridge"]
+                              }
+
+      expect(@park1.trails_by_level).to eq(park1_trails_by_level)
+      expect(@park2.trails_by_level).to eq(park2_trails_by_level)
+    end
+  end
 end

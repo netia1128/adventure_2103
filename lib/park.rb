@@ -23,9 +23,23 @@ class Park
     end
   end
 
+  def trails_by_level
+    @trails.each_with_object({}) do |trail, hash|
+      hash[trail.level] = names_of_trails_at_level(trail.level)
+    end
+  end
+
+  private
+
   def trails_at_level(experience_level)
     @trails.find_all do |trail|
-      trail.experience_level == experience_level
+      trail.level == experience_level
+    end
+  end
+
+  def names_of_trails_at_level(experience_level)
+    trails_at_level(experience_level).map do |trail|
+      trail.name
     end
   end
 end

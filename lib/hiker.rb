@@ -26,4 +26,11 @@ class Hiker
       end
     end
   end
+
+  def favorite_snack
+    favorite_snack = @snacks.max_by do |snack, quantity|
+      quantity
+    end
+    favorite_snack.first
+  end
 end
